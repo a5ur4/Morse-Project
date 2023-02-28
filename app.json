@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Morse Project V2",
+    "name": "Morse Project V2.5",
     "slug": "Morse_Project",
-    "version": "2.0.0",
+    "version": "2.5.0",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "light",
