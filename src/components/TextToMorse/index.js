@@ -9,8 +9,10 @@ import { SafeAreaView,
     Share, 
     Pressable, 
     Keyboard } from "react-native";
-    import * as Speech from 'expo-speech';
+import * as Speech from 'expo-speech';
+import { ref, set } from 'firebase/database';
 
+import { db } from "../../config/FirebaseConfig";
 import styles from './style'
 
 export default function TextToMorse(){
@@ -77,6 +79,16 @@ export default function TextToMorse(){
             }
         })
         var finalMessage = map.join(" ")
+        set(ref(db, '/TextToMorse' + text), {
+            Text: text,
+            Morse: finalMessage,
+        }).then(() => {
+        // Data saved sucessfully
+        })
+        .catch((error) => {
+                // The write failed
+                alert(error)
+        })
         setMorse(finalMessage)
         setText(null)
     }
