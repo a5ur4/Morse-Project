@@ -10,8 +10,9 @@ import { SafeAreaView,
         Pressable, 
         Keyboard } from "react-native";
 import * as Speech from 'expo-speech';
+import { ref, set } from 'firebase/database';
 
-
+import { db } from "../../config/FirebaseConfig";
 import styles from './style'
 
 export default function MorseToText() { 
@@ -71,6 +72,16 @@ export default function MorseToText() {
         MorseToConvert = MorseToConvert.toUpperCase()
         var ConvertedMorse = MorseToConvert.replace(/([-/\./.-]+[-./\./-]*)/g, (_, el) =>morseAlphabet [el]);
         ConvertedMorse = ConvertedMorse.replace(/\s/g, '')
+        set(ref(db, '/MorseToText' + ConvertedMorse), {
+            Morse: morse,
+            Text: ConvertedMorse,
+        }).then(() => {
+        // Data saved sucessfully
+        })
+        .catch((error) => {
+                // The write failed
+                alert(error)
+        })
         setText(ConvertedMorse)
         setMorse(null)
     }
