@@ -72,9 +72,12 @@ export default function MorseToText() {
         MorseToConvert = MorseToConvert.toUpperCase()
         var ConvertedMorse = MorseToConvert.replace(/([-/\./.-]+[-./\./-]*)/g, (_, el) =>morseAlphabet [el]);
         ConvertedMorse = ConvertedMorse.replace(/\s/g, '')
+        var dateMorse = new Date();
+        dateMorse = dateMorse.toLocaleTimeString()
         set(ref(db, '/MorseToText' + ConvertedMorse), {
             Morse: morse,
             Text: ConvertedMorse,
+            Date: dateMorse,
         }).then(() => {
         // Data saved sucessfully
         })
