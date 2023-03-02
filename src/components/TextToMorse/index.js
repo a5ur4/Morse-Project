@@ -79,9 +79,12 @@ export default function TextToMorse(){
             }
         })
         var finalMessage = map.join(" ")
+        var dateMorse = new Date();
+        dateMorse = dateMorse.toLocaleTimeString()
         set(ref(db, '/TextToMorse' + text), {
             Text: text,
             Morse: finalMessage,
+            Date: dateMorse,
         }).then(() => {
         // Data saved sucessfully
         })
